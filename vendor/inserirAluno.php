@@ -13,12 +13,22 @@ echo 'Conectado com sucesso'.PHP_EOL;
 
 $student = new Student(
     $int = null,
-    $name = 'Heitor Batistela Zunta',
-    $bithDate = new DateTimeImmutable('26-11-1983')
+    $name = 'Geciani Mirian Silva',
+    $bithDate = new DateTimeImmutable('22-10-1983')
 );
 
-$requestInsert = "INSERT INTO students (name, birthDate) VALUES ('{$student->name()}', '{$student->birthDate()->format('Y-m-d')}')";
+$sqlInsert = 'INSERT INTO students
+     (name, birthDate)
+      VALUES
+      (:name, :birthDate);';    
+$statement = $pdo->prepare($sqlInsert);
+$statement->bindValue(':name', $student->name());
+$statement->bindValue(':birthDate', $student->birthDate()->format('Y-m-d'));
 
-var_dump($pdo->exec($requestInsert));
-
+if($statement->execute()){
+    echo 'Aluno incluso!';
+}
+else{
+    echo 'Erro ao incluir aluno';
+}
 ?>
