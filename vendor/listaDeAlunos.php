@@ -3,12 +3,10 @@
 require_once 'autoload.php';
 use Alura\Pdo\Domain\Model\Student;
 use DateTimeImmutable;
+use Alura\Pdo\Infrastructure\Persistence\connectionFactory;
 
-$path = __DIR__ . '/banco.sqlite';
-$dsn = 'sqlite:' . $path;
-$pdo = new PDO($dsn);
-
-echo 'Conectado com sucesso'.PHP_EOL;
+// Conexão com o Banco
+$pdo = connectionFactory::connection();
 
 
 $query = 'SELECT * FROM students';

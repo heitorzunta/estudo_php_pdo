@@ -1,12 +1,11 @@
 <?php
+
+use Alura\Pdo\Infrastructure\Persistence\connectionFactory;
+
 require_once "autoload.php";
 
 
-$path = __DIR__ . '/banco.sqlite';
-$dsn = 'sqlite:' . $path;
-$pdo = new PDO($dsn);
-
-echo 'Conectado com sucesso'.PHP_EOL;
+$pdo = connectionFactory::connection();
 
 
 $sqlDelete = 'DELETE FROM students WHERE id LIKE :id;';

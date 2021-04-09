@@ -1,6 +1,9 @@
 <?php
 
 namespace Alura\Pdo\Domain\Model;
+
+use DomainException;
+
 class Student
 {
     private ?int $id;
@@ -34,5 +37,16 @@ class Student
         return $this->birthDate
             ->diff(new \DateTimeImmutable())
             ->y;
+    }
+
+    public function defineId(int $id)
+    {
+        if (!is_null($this->id)){
+            throw new DomainException(
+                'ID já existe, você não
+                 pode reatribuir ID');
+        }
+
+        $this->id = $id;
     }
 }
