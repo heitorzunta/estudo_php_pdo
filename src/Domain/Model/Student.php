@@ -3,14 +3,15 @@
 namespace Alura\Pdo\Domain\Model;
 
 use DomainException;
+use DateTimeImmutable;
 
 class Student
 {
     private ?int $id;
     private string $name;
-    private \DateTimeInterface $birthDate;
+    private \DateTimeImmutable $birthDate;
 
-    public function __construct(?int $id, string $name, \DateTimeInterface $birthDate)
+    public function __construct(?int $id, string $name, DateTimeImmutable $birthDate)
     {
         $this->id = $id;
         $this->name = $name;
@@ -27,7 +28,7 @@ class Student
         return $this->name;
     }
 
-    public function birthDate(): \DateTimeInterface
+    public function birthDate(): DateTimeImmutable
     {
         return $this->birthDate;
     }
@@ -35,7 +36,7 @@ class Student
     public function age(): int
     {
         return $this->birthDate
-            ->diff(new \DateTimeImmutable())
+            ->diff(new DateTimeImmutable())
             ->y;
     }
 

@@ -17,7 +17,13 @@ class ConnectionFactory {
             * estrutura: driver:informacoes_especificas_do_driver
             */
             $dsn = 'sqlite:' . $path;
-            return new PDO($dsn);
+            $connection = new PDO($dsn);
+            $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+            //caso queira mudar a saida padrão do fetch de both para assoc
+            // por exemplo basta adicionar a linha abaixo:
+            $connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            return $connection;
 
         } catch (PDOException $e){
             echo ("ERRO:" . $e->getMessage());

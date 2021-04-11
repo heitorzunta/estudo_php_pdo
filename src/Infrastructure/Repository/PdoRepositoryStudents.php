@@ -64,7 +64,7 @@ class PdoRepositoryStudents implements StudentRepository{
     public function hydratateStudentList(PDOStatement $statement): array
     {
         $studentList = [];
-        while ($studentData = $statement->fetch(PDO::FETCH_ASSOC)){
+        while ($studentData = $statement->fetch()){
             $studentList[] = new Student(
                 $studentData['id'],
                 $studentData['name'],
